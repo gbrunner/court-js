@@ -278,7 +278,7 @@ require([
       });
     });
 
-    compareCameraBtn.addEventListener('click', function() {
+    /*compareCameraBtn.addEventListener('click', function() {
       view.goTo({
         position: {
           x: 0.01,
@@ -312,7 +312,7 @@ require([
         tilt: 90,
         heading: 0
       });
-    });
+    });*/
 
     missesCameraBtn.addEventListener('click', function() {
       view.goTo({
