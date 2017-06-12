@@ -157,7 +157,7 @@ require([
     }
   });
 
-  var rwMissesFeatureLayer = new FeatureLayer({
+/*  var rwMissesFeatureLayer = new FeatureLayer({
     url: rwMissesFeatureServiceUrl,
     renderer: missesRenderer,
     mode: FeatureLayer.MODE_SNAPSHOT,
@@ -175,7 +175,7 @@ require([
       mode: 'relative-to-ground', //'on-the-ground'
       offset: 2.5
     }
-  });
+  });*/
 
   //-------------
   var graphicsLayer = new GraphicsLayer();
