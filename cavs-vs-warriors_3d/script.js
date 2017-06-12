@@ -260,7 +260,7 @@ require([
     //var compareHomeBaselineCameraBtn = document.getElementById('compareHomeBaselineCameraBtn');
     var missesCameraBtn = document.getElementById('missesCameraBtn');
 
-    [hitsCameraBtn, compareCameraBtn, compareAwayBaselineCameraBtn, compareHomeBaselineCameraBtn, missesCameraBtn].forEach(function(button) {
+    [hitsCameraBtn, missesCameraBtn].forEach(function(button) {
       button.style.display = 'flex';
       view.ui.add(button, 'top-right');
     });
