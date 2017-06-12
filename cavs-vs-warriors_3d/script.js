@@ -255,9 +255,9 @@ require([
     view.ui.add(homeBtn, 'top-left');
 
     var hitsCameraBtn = document.getElementById('hitsCameraBtn');
-    var compareCameraBtn = document.getElementById('compareCameraBtn');
-    var compareAwayBaselineCameraBtn = document.getElementById('compareAwayBaselineCameraBtn');
-    var compareHomeBaselineCameraBtn = document.getElementById('compareHomeBaselineCameraBtn');
+    //var compareCameraBtn = document.getElementById('compareCameraBtn');
+    //var compareAwayBaselineCameraBtn = document.getElementById('compareAwayBaselineCameraBtn');
+    //var compareHomeBaselineCameraBtn = document.getElementById('compareHomeBaselineCameraBtn');
     var missesCameraBtn = document.getElementById('missesCameraBtn');
 
     [hitsCameraBtn, compareCameraBtn, compareAwayBaselineCameraBtn, compareHomeBaselineCameraBtn, missesCameraBtn].forEach(function(button) {
@@ -317,12 +317,12 @@ require([
     missesCameraBtn.addEventListener('click', function() {
       view.goTo({
         position: {
-          x: 0,
+          x: 0.01,
           y: 0,
-          z: -1200
+          z: 1200
         },
         tilt: 0,
-        heading: 90
+        heading: 270
       });
     });
 
