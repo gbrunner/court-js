@@ -283,9 +283,9 @@ require([
         position: {
           x: 0.01,
           y: 0,
-          z: 0
+          z: 1200
         },
-        tilt: 90,
+        tilt: 0,
         heading: 270
       });
     });
