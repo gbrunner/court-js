@@ -36,7 +36,7 @@ require([
   var hexbinsFeatureServiceUrl =
     'http://services1.arcgis.com/g2TonOxuRkIqSOFx/arcgis/rest/services/Cavs_Warriors_Game_1_4_WFL1/FeatureServer/0';
   var missesFeatureServiceUrl =
-    'http://services1.arcgis.com/g2TonOxuRkIqSOFx/arcgis/rest/services/Cavs_Warriors_Game_1_4_Warriors_Away_WFL1/FeatureServer/0;
+    'http://services1.arcgis.com/g2TonOxuRkIqSOFx/arcgis/rest/services/Cavs_Warriors_Game_1_4_Warriors_Away_WFL1/FeatureServer/0';
     
   var tileLayer = new TileLayer({
     url: basketballCourtMapServiceUrl
