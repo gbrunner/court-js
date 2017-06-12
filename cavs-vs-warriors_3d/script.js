@@ -36,7 +36,7 @@ require([
   var hexbinsFeatureServiceUrl =
     'http://services1.arcgis.com/g2TonOxuRkIqSOFx/arcgis/rest/services/Cavs_Warriors_Game_1_4_WFL1/FeatureServer/0';
   var missesFeatureServiceUrl =
-    'http://services1.arcgis.com/g2TonOxuRkIqSOFx/arcgis/rest/services/Cavs_Warriors_Game_1_4_WFL1/FeatureServer/1';
+    'http://services1.arcgis.com/g2TonOxuRkIqSOFx/arcgis/rest/services/Cavs_Warriors_Game_1_4_Warriors_Away_WFL1/FeatureServer/0;
     
   var tileLayer = new TileLayer({
     url: basketballCourtMapServiceUrl
@@ -91,16 +91,16 @@ require([
         field: 'Point_Count',
         stops: [{
           value: 1,
-          size: -10,
+          size: 10,
         }, {
           value: 2,
-          size: -20,
+          size: 20,
         }, {
           value: 4,
-          size: -40,
+          size: 40,
         }, {
           value: 16,
-          size: -160,
+          size: 160,
         }]
       }, {
         type: 'color',
