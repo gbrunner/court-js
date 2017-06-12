@@ -153,7 +153,7 @@ require([
     mode: FeatureLayer.MODE_SNAPSHOT,
     elevationInfo: {
       mode: 'relative-to-ground', //'on-the-ground'
-      offset: -2.5
+      offset: 2.5
     }
   });
 
