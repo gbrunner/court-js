@@ -317,8 +317,8 @@ require([
     missesCameraBtn.addEventListener('click', function() {
       view.goTo({
         position: {
-          x: 0.01,
-          y: 0,
+          x: 0,
+          y: 0.01,
           z: 1200
         },
         tilt: 0,
