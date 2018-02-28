@@ -1,4 +1,3 @@
-var view;
 require([
   'esri/layers/FeatureLayer',
   'esri/layers/TileLayer',
@@ -14,17 +13,12 @@ require([
 ], function(
   FeatureLayer, TileLayer, Map, SimpleRenderer, ExtrudeSymbol3DLayer, PolygonSymbol3D, SceneView, Home, Query
 ) {
+  // var basketballCourtMapServiceUrl = 'https://tiles.arcgis.com/tiles/g2TonOxuRkIqSOFx/arcgis/rest/services/BW_Court_Tiles/MapServer';
+  var basketballCourtMapServiceUrl = 'https://tiles.arcgis.com/tiles/g2TonOxuRkIqSOFx/arcgis/rest/services/Dark_Basketball_Court/MapServer';
 
+  var hexbinsFeatureServiceUrl = 'https://services1.arcgis.com/g2TonOxuRkIqSOFx/arcgis/rest/services/StephCurry_2016_17_WFL1/FeatureServer/0';
+  // var hexbinsFeatureServiceUrl = 'https://services1.arcgis.com/g2TonOxuRkIqSOFx/arcgis/rest/services/Scene_NBA_Test2_WFL/FeatureServer/0';
 
-
-  /*var basketballCourtMapServiceUrl =
-    '//tiles.arcgis.com/tiles/g2TonOxuRkIqSOFx/arcgis/rest/services/BW_Court_Tiles/MapServer';*/
-  var basketballCourtMapServiceUrl =
-    '//tiles.arcgis.com/tiles/g2TonOxuRkIqSOFx/arcgis/rest/services/Dark_Basketball_Court/MapServer';
-  var hexbinsFeatureServiceUrl =
-    '//services1.arcgis.com/g2TonOxuRkIqSOFx/arcgis/rest/services/StephCurry_2016_17_WFL1/FeatureServer/0';
-  /*'//services1.arcgis.com/g2TonOxuRkIqSOFx/arcgis/rest/services/Scene_NBA_Test2_WFL/FeatureServer/0';
-   */
   var tileLayer = new TileLayer({
     url: basketballCourtMapServiceUrl
   });
@@ -82,18 +76,15 @@ require([
 
   var featureLayer = new FeatureLayer({
     url: hexbinsFeatureServiceUrl,
-    definitionExpression: "GAME_DATE='2016-10-25'",
+    definitionExpression: 'GAME_DATE = \'2016-10-25\'',
     renderer: renderer
   });
 
-  var map = new Map({
-    // basemap: 'topo',
-    layers: [tileLayer, featureLayer]
-  });
-
-  view = new SceneView({
+  var view = new SceneView({
     container: 'viewDiv',
-    map: map,
+    map: new Map({
+      layers: [tileLayer, featureLayer]
+    }),
     viewingMode: 'local',
     camera: {
       position: {
@@ -110,52 +101,45 @@ require([
     }
   });
 
-  view.then(function() {
+  view.when(function() {
     // Use the exent defined in clippingArea to define the bounds of the scene
     view.clippingArea = tileLayer.fullExtent;
     view.extent = tileLayer.fullExtent;
 
     featureLayer.then(function() {
       var query = new Query();
-      query.where = "1=1";
+      query.where = '1 = 1';
       query.returnGeometry = false;
-      query.outFields = ["GAME_DATE"];
-      query.orderByFields = ["GAME_DATE ASC"];
+      query.outFields = ['GAME_DATE'];
+      query.orderByFields = ['GAME_DATE ASC'];
       query.returnDistinctValues = true;
 
       // Queries for all the features in the service (not the graphics in the view)
       featureLayer.queryFeatures(query).then(function(results) {
         // prints an array of all the features in the service to the console
-        console.log(results.features);
+        // console.log(results.features);
 
         var uniqueDates = results.features.map(function(feature) {
           return new Date(feature.attributes.GAME_DATE).toJSON().split('T')[0];
         });
 
-        var gameDateSlider = document.getElementById('gameDateSlider');
         var dateLabel = document.getElementById('dateLabel');
-
         dateLabel.innerHTML = uniqueDates[0];
+        
+        var gameDateSlider = document.getElementById('gameDateSlider');
+        gameDateSlider.addEventListener('change', gameDateSliderChange);
+        gameDateSlider.addEventListener('input', gameDateSliderChange);
 
-        gameDateSlider.addEventListener('change', function(evt) {
+        function gameDateSliderChange(evt) {
           var dataIndex = evt.target.value;
-          console.log(dataIndex);
-
-
           dateLabel.innerHTML = uniqueDates[dataIndex];
-          var newExpression = 'GAME_DATE = \'' + uniqueDates[dataIndex] + '\'';
-          featureLayer.definitionExpression = newExpression;
-        });
-
+          featureLayer.definitionExpression = 'GAME_DATE = \'' + uniqueDates[dataIndex] + '\'';
+        }
       });
-
     });
-
   });
 
-  var homeBtn = new Home({
+  view.ui.add(new Home({
     view: view
-  }, 'homeDiv');
-  view.ui.add(homeBtn, 'top-left');
-
+  }, 'homeDiv'), 'top-left');
 });
